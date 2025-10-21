@@ -113,16 +113,12 @@
 
 }
 
-.a4{
-    color: var(--text-color-2);
-}
-
 .logout:hover{
     background-color: #f05454;
 }
 
 .mid{
-    height: 1200px;
+    height: 700px;
     width: 100%;
     background-color: #f7f9fb;
     display: flex;
@@ -131,8 +127,8 @@
 }
 
 .title{
-    width: 400px;
-    height: 150px;
+    width: 450px;
+    min-height: 100px;
     display: flex;
     align-items: start;
     justify-content: space-evenly;
@@ -148,11 +144,87 @@
     background-color: #ffffff;
 }
 
-.add{
+.mid-box{
+    height: 380px;
+    width: 600px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #9e9e9e;
+    padding: 20px 25px 25px 25px;
+}
+
+.current-credentials{
+    height: 100%;
+    width: 100%;
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.name{
+    width: 100%;
+    height: 65px;
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.first-box{
+    width: 49%;
+    height: 100%;
+    /* border: 2px solid lime; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.name-box{
+    height: 35px;
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgrey;
+    color: var(--text-color);
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.same{
+    width: 100%;
+    height: 65px;
+    /* border: 2px solid lime; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+
+.same-2{
+    height: 35px;
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgrey;
+    color: var(--text-color);
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.save{
+    width: 600px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save button{
     background-color:#238bd9;
     color: white;
     height: 37px;
-    width: 110px;
+    width: 140px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -161,104 +233,8 @@
     font-size: 16px;
     font-weight: 430;
     cursor: pointer;
-    text-decoration: none;
 }
 
-.add:active{
-    opacity: .8;
-}
-
-.Patient-label{
-    height: 70px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--head-color);
-}
-
-.manage-Patient{
-    width: 800px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    padding: 0 25px 25px 25px;
-    border-radius: 10px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
-}
-
-.manage-main{
-    width: 100%;
-    height: auto;
-}
-
-.manage-box-content{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid lightgrey;
-}
-
-.head{
-    color: var(--head-color);
-    font-weight: 600;
-    background-color: #f3f7fc;
-    border: none;
-    border-bottom: 2px solid #d1e0f1;
-    border-radius: 10px 10px 0 0;
-}
-
-.content{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.edit{
-    background-color: #d6e2f3;
-    height: 35px;
-    width: 50px;
-    border-radius: 10px;
-    font-weight: 500;
-    text-decoration: none;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.Action{
-    width: 70%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.delete{
-    background-color: #fd545a;
-    color: white;
-    height: 35px;
-    width: 65px;
-    border-radius: 10px;
-    font-weight: 500;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.edit:active{
-    opacity: .8;
-}
-
-.delete:active{
+.save button:active{
     opacity: .8;
 }
