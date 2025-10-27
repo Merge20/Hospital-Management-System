@@ -1,25 +1,27 @@
+<?php
+include("../../includes/session_check.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/appointment.css">
-    <title>Appointments | Hospital</title>
+    <meta name="viewport" width="device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/manage-appointment.css">
+    <title>Manage Appointment | Hospital</title>
 </head>
 <body>
     <div class="main">
         <div class="header">
             <div class="h-left"><img src="../img's/logo.png"></div>
             <div class="h-mid">
-                <a href="../index.html" class="links a1"><img src="../logo's/home-logo.svg">Home</a>
-                <a href="./appointment.html" class="links a2"><img src="../logo's/manage-appointment-logo-2.png">Appointments</a>
-                <a href="./doctor.html" class="links a3"><img src="../logo's/doctor-logo.png">Doctor's</a>
-                <a href="./patient.html" class="links a4"><img src="../logo's/patient-logo.svg">Patient's</a>
-                <a href="./report.html" class="links a5"><img src="../logo's/report-logo.svg">Reports</a>    
+                <a href="../home.php" class="links a1"><img src="../logo's/home-logo.svg">Home</a>
+                <a href="./book-appointment.php" class="links a2"><img src="../logo's/book-appointment-logo.svg">Book Appointments</a>
+                <a href="./manage-appointment.php" class="links a3"><img src="../logo's/manage-appointment-logo-2.png">Manage Appointments</a>
+                <a href="./report.php" class="links a4"><img src="../logo's/report-logo.svg">Reports</a>
             </div>
             <div class="h-right">
-                <a href="./account-edit.html" class="links a6 profile"><img src="../logo's/profile-logo.svg">Admin</a>
-                <a href="#" class="links logout a7"><img src="../logo's/logout-logo.svg">Logout</a>
+                <a href="./account-edit.php" class="links a5 profile"><img src="../logo's/profile-logo.svg">Patient</a>
+                <a href="./logout.php" class="links logout a6"><img src="../logo's/logout-logo.svg">Logout</a>
             </div>
         </div>
         <div class="mid">
@@ -28,7 +30,6 @@
                 <div class="manage-box-label">Current Appointments</div>
                 <div class="manage-box-main">
                     <div class="manage-box-content head">
-                        <div class="content">Patient Name</div>
                         <div class="content">Doctor Name</div>
                         <div class="content">Date</div>
                         <div class="content">Time</div>
@@ -36,7 +37,6 @@
                         <div class="content">Action</div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -48,7 +48,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -60,7 +59,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -72,7 +70,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -84,7 +81,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -96,7 +92,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -108,7 +103,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -120,7 +114,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -132,7 +125,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -144,7 +136,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -156,7 +147,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -168,7 +158,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -180,7 +169,6 @@
                         </div>
                     </div>
                     <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>
@@ -191,8 +179,7 @@
                             <button class="cancel">Cancel</button>
                         </div>
                     </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
+                    <div class="manage-box-content">    
                         <div class="content">Dr. Pandu</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">5:00 PM</div>

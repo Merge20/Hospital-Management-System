@@ -1,3 +1,6 @@
+<?php
+include("../../includes/session_check.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,14 +14,14 @@
         <div class="header">
             <div class="h-left"><img src="../img's/logo.png"></div>
             <div class="h-mid">
-                <a href="../index.html" class="links a1"><img src="../logo's/home-logo.svg">Home</a>
-                <a href="./book-appointment.html" class="links a2"><img src="../logo's/book-appointment-logo.svg">Book Appointments</a>
-                <a href="./manage-appointment.html" class="links a3"><img src="../logo's/manage-appointment-logo-2.png">Manage Appointments</a>
-                <a href="./report.html" class="links a4"><img src="../logo's/report-logo.svg">Reports</a>
+                <a href="../index.php" class="links a1"><img src="../logo's/home-logo.svg">Home</a>
+                <a href="./book-appointment.php" class="links a2"><img src="../logo's/book-appointment-logo.svg">Book Appointments</a>
+                <a href="./manage-appointment.php" class="links a3"><img src="../logo's/manage-appointment-logo-2.png">Manage Appointments</a>
+                <a href="./report.php" class="links a4"><img src="../logo's/report-logo.svg">Reports</a>
             </div>
             <div class="h-right">
-                <a href="./account-edit.html" class="links a5 profile"><img src="../logo's/profile-logo.svg">Patient</a>
-                <a href="#" class="links logout a6"><img src="../logo's/logout-logo.svg">Logout</a>
+                <a href="./account-edit.php" class="links a5 profile"><img src="../logo's/profile-logo.svg">Patient</a>
+                <a href="./logout.php" class="links logout a6"><img src="../logo's/logout-logo.svg">Logout</a>
             </div>
         </div>
         <div class="mid">

@@ -233,6 +233,17 @@
     align-items: center;
 }
 
+.cancelled{
+    height: 35px;
+    width: 100px;   
+    background-color: #f05454;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .pending{
     height: 35px;
     width: 90px;

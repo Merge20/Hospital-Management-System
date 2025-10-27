@@ -1,3 +1,7 @@
+<?php
+include("../../includes/session_check.php");
+include("../../includes/db.php");
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,15 +15,15 @@
         <div class="header">
             <div class="h-left"><img src="../img's/logo.png"></div>
             <div class="h-mid">
-                <a href="../index.html" class="links a1"><img src="../logo's/home-logo.svg">Home</a>
-                <a href="./appointment.html" class="links a2"><img src="../logo's/manage-appointment-logo-2.png">Appointments</a>
-                <a href="./doctor.html" class="links a3"><img src="../logo's/doctor-logo.png">Doctor's</a>
-                <a href="./patient.html" class="links a4"><img src="../logo's/patient-logo.svg">Patient's</a>
-                <a href="./report.html" class="links a5"><img src="../logo's/report-logo.svg">Reports</a>    
+                <a href="../home.php" class="links a1"><img src="../logo's/home-logo.svg">Home</a>
+                <a href="./appointment.php" class="links a2"><img src="../logo's/manage-appointment-logo-2.png">Appointments</a>
+                <a href="./doctor.php" class="links a3"><img src="../logo's/doctor-logo.png">Doctor's</a>
+                <a href="./patient.php" class="links a4"><img src="../logo's/patient-logo.svg">Patient's</a>
+                <a href="./report.php" class="links a5"><img src="../logo's/report-logo.svg">Reports</a>    
             </div>
             <div class="h-right">
-                <a href="./account-edit.html" class="links a6 profile"><img src="../logo's/profile-logo.svg">Admin</a>
-                <a href="#" class="links logout a7"><img src="../logo's/logout-logo.svg">Logout</a>
+                <a href="./account-edit.php?role=admin&id=<?php echo $_SESSION['user_id']; ?>" class="links a6 profile"><img src="../logo's/profile-logo.svg">Admin</a>
+                <a href="./logout.php" class="links logout a7"><img src="../logo's/logout-logo.svg">Logout</a>
             </div>
         </div>
         <div class="mid">

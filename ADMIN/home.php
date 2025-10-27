@@ -1,3 +1,25 @@
+<?php
+include("../includes/session_check.php");
+include("../includes/db.php");
+
+function getCount($conn, $query, $label) {
+    $result = $conn->query($query);
+    if (!$result) {
+        die("Query failed for $label: " . $conn->error);
+    }
+    $row = $result->fetch_assoc();
+    return $row[array_keys($row)[0]] ?? 0;
+}
+
+$total_doctors = getCount($conn, "SELECT COUNT(*) AS total_doctors FROM doctor", "doctor");
+$total_patients = getCount($conn, "SELECT COUNT(*) AS total_patients FROM patient", "patient");
+$total_appointments = getCount($conn, "SELECT COUNT(*) AS total_appointments FROM appointments", "appointments");
+
+// For reports, since you don’t have a reports table, use appointments.report_uploaded
+$total_reports = getCount($conn, "SELECT COUNT(*) AS total_reports FROM appointments WHERE report_uploaded = 1", "reports");
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,32 +33,32 @@
         <div class="header">
             <div class="h-left"><img src="./img's/logo.png"></div>
             <div class="h-mid">
-                <a href="./index.html" class="links a1"><img src="./logo's/home-logo.svg">Home</a>
-                <a href="./pages/appointment.html" class="links a2"><img src="./logo's/manage-appointment-logo-2.png">Appointments</a>
-                <a href="./pages/doctor.html" class="links a3"><img src="./logo's/doctor-logo.png">Doctor's</a>
-                <a href="./pages/patient.html" class="links a4"><img src="./logo's/patient-logo.svg">Patient's</a>
-                <a href="./pages/report.html" class="links a5"><img src="./logo's/report-logo.svg">Reports</a>    
+                <a href="./home.php" class="links a1"><img src="./logo's/home-logo.svg">Home</a>
+                <a href="./pages/appointment.php" class="links a2"><img src="./logo's/manage-appointment-logo-2.png">Appointments</a>
+                <a href="./pages/doctor.php" class="links a3"><img src="./logo's/doctor-logo.png">Doctor's</a>
+                <a href="./pages/patient.php" class="links a4"><img src="./logo's/patient-logo.svg">Patient's</a>
+                <a href="./pages/report.php" class="links a5"><img src="./logo's/report-logo.svg">Reports</a>    
             </div>
             <div class="h-right">
-                <a href="./pages/account-edit.html" class="links a6 profile"><img src="./logo's/profile-logo.svg">Admin</a>
-                <a href="#" class="links logout a7"><img src="./logo's/logout-logo.svg">Logout</a>
+                <a href="./pages/account-edit.php?role=admin&id=<?php echo $_SESSION['user_id']; ?>" class="links a6 profile"><img src="./logo's/profile-logo.svg">Admin</a>
+                <a href="./pages/logout.php" class="links logout a7"><img src="./logo's/logout-logo.svg">Logout</a>
             </div>
         </div>
         <div class="mid">   
-            <div class="greet">Welcome, Admin</div>
+            <div class="greet">Welcome, <?php echo $_SESSION['last_name']; ?></div>
             <div class="stats">
                 <div class="stat-box">
                     <div class="stat-card">
                         <div class="stat-logo"><img src="./logo's/doctor-logo.png"></div>
                         <div class="">
-                            <div class="stat-number">12</div>
+                            <div class="stat-number"><?php echo $total_doctors; ?></div>
                             <div class="stat-label">Total Doctors</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-logo logo2"><img src="./logo's/manage-appointment-logo-2.png"></div>
                         <div class="">
-                            <div class="stat-number">3</div>
+                            <div class="stat-number"><?php echo $total_appointments; ?></div>
                             <div class="stat-label">Total Appointment</div>
                         </div>
                     </div>
@@ -45,14 +67,14 @@
                     <div class="stat-card">
                         <div class="stat-logo"><img src="./logo's/patient-logo.svg"></div>
                         <div class="">
-                            <div class="stat-number">50</div>
+                            <div class="stat-number"><?php echo $total_patients; ?></div>
                             <div class="stat-label">Total Patients</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-logo"><img src="./logo's/report-logo.svg"></div>
                         <div class="">
-                            <div class="stat-number">58</div>
+                            <div class="stat-number"><?php echo $total_reports; ?></div>
                             <div class="stat-label">Reports Uploaded</div>
                         </div>
                     </div>
@@ -68,31 +90,6 @@
                     </div>
                     <div class="activity-box-content">
                         <div class="content activity">File Uploaded</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">10:00 PM</div>
-                    </div>
-                    <div class="activity-box-content">
-                        <div class="content activity">New Doctor added</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">10:00 PM</div>
-                    </div>
-                    <div class="activity-box-content">
-                        <div class="content activity">Appointment Completed</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">10:00 PM</div>
-                    </div>
-                    <div class="activity-box-content">
-                        <div class="content activity">File Uploaded</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">10:00 PM</div>
-                    </div>
-                    <div class="activity-box-content">
-                        <div class="content activity">New Doctor added</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">10:00 PM</div>
-                    </div>
-                    <div class="activity-box-content">
-                        <div class="content activity">Appointment Completed</div>
                         <div class="content">15 Oct, 2025</div>
                         <div class="content">10:00 PM</div>
                     </div>

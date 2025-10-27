@@ -250,3 +250,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.cancelled{
+    height: 35px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f05454;
+    border-radius: 10px;
+    color: white;
+}
