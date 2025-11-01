@@ -1,6 +1,8 @@
 <?php
 include("../../includes/session_check.php");
 include("../../includes/db.php");
+include("../../includes/mail.php");
+
 
 if (!isset($_GET['role']) || !isset($_GET['id'])) {
     echo "<script>alert('Invalid access!'); window.location.href='../home.php';</script>";
@@ -34,6 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $update->bind_param("sssssi", $first_name, $last_name, $email, $phone, $password, $id);
     $update->execute();
 
+
+    if ($update->affected_rows > 0) {
+        sendMail(
+            $email,
+            "Account Information Updated",
+            "<p>Dear {$first_name} {$last_name},<br>
+            Your account information has been updated by the administrator.</p>"
+        );
+    }
     if($role == "admin"){
         echo "<script>alert('User details updated successfully!'); window.location.href='../home.php';</script>";
     }

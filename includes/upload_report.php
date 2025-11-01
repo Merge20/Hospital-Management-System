@@ -1,7 +1,8 @@
 <?php
+session_start();
 include("./db.php");
 include("./functions.php");
-session_start();
+include("./mail.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!isset($_SESSION['user_id'])) die("Unauthorized");
@@ -38,12 +39,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!move_uploaded_file($file['tmp_name'], $targetPath)) die("Failed to save file");
 
-    $stmt = $conn->prepare("
-        INSERT INTO reports (appointment_id, doctor_id, patient_id, report_type, file_path)
-        SELECT a.id, a.doctor_id, a.patient_id, ?, ?
+    // Fetch patient info for email
+    $getPat = $conn->prepare("
+        SELECT p.email, p.first_name, p.last_name, d.first_name AS doc_fname, d.last_name AS doc_lname
         FROM appointments a
+        JOIN patient p ON a.patient_id = p.id
+        JOIN doctor d ON a.doctor_id = d.id
         WHERE a.id = ?
     ");
+    $getPat->bind_param("i", $appointment_id);
+    $getPat->execute();
+    $info = $getPat->get_result()->fetch_assoc();
+
+    sendMail(
+        $info['email'],
+        "Your Report is Ready",
+        "<p>Dear {$info['first_name']} {$info['last_name']},<br>
+        Your report for appointment has been uploaded by Dr. {$info['doc_fname']} {$info['doc_lname']}.</p>
+        <p>You can download it from your dashboard.</p>"
+    );
+    $stmt = $conn->prepare("INSERT INTO reports (report_type, file_name, appointment_id) VALUES (?, ?, ?)");
     $stmt->bind_param("ssi", $report_type, $newName, $appointment_id);
 
     if ($stmt->execute()) {
