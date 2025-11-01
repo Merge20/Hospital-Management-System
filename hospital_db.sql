@@ -34,7 +34,9 @@ CREATE TABLE appointments (
 );
 CREATE TABLE activity_log (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    activity_type VARCHAR(50) NOT NULL,
+    user_id INT NULL,
+    role ENUM('admin', 'doctor', 'patient') NULL,
+    activity_type VARCHAR(100) NOT NULL,
     description TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
