@@ -84,17 +84,40 @@ $total_reports = getCount($conn, "SELECT COUNT(*) AS total_reports FROM appointm
                 <div class="activity-label">Recent Activities</div>
                 <div class="activity-main">
                     <div class="activity-box-content head">
-                        <div class="content">Activity</div>
-                        <div class="content">Date</div>
-                        <div class="content">Time</div>
+                        <div class="content activity">Activity</div>
+                        <div class="content ">Description</div>
+                        <div class="content date">Date</div>
+                        <div class="content time">Time</div>
                     </div>
-                    <div class="activity-box-content">
-                        <div class="content activity">File Uploaded</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">10:00 PM</div>
-                    </div>
+                    <?php
+                    $activityQuery = "SELECT activity_type, description, created_at FROM activity_log ORDER BY created_at DESC LIMIT 10";
+                    $activityResult = $conn->query($activityQuery);
+
+                    if ($activityResult && $activityResult->num_rows > 0) {
+                        while ($activity = $activityResult->fetch_assoc()) {
+                            $date = date("d M, Y", strtotime($activity['created_at']));
+                            $time = date("h:i A", strtotime($activity['created_at']));
+                            echo "
+                                <div class='activity-box-content'>
+                                    <div class='content activity'>{$activity['activity_type']}</div>
+                                    <div class='content desc'>{$activity['description']}</div>
+                                    <div class='content date'>{$date}</div>
+                                    <div class='content time'>{$time}</div>
+                                </div>
+                            ";
+                        }
+                    } else {
+                        echo "
+                            <div class='activity-box-content'>
+                                <div class='content' colspan='4'>No recent activity found.</div>
+                            </div>
+                        ";
+                    }
+                    ?>
                 </div>
             </div>
+
+
         </div>
         <div class="footer"></div>
     </div>

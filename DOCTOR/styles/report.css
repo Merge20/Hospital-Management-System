@@ -275,3 +275,19 @@
 .upload:active{
     opacity: .8;
 }
+
+.report-input {
+    width: 160px;
+    height: 30px;
+    border: 1.5px solid #d3d3d3;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.report-input:focus {
+    border-color: #238bd9;
+    box-shadow: 0 0 5px rgba(35, 139, 217, 0.3);
+}

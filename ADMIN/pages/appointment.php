@@ -1,6 +1,24 @@
 <?php
 include("../../includes/session_check.php");
 include("../../includes/db.php");
+
+$query = "
+    SELECT 
+        a.id,
+        p.first_name AS patient_fname, p.last_name AS patient_lname,
+        d.first_name AS doctor_fname, d.last_name AS doctor_lname,
+        a.appointment_date,
+        a.status
+    FROM appointments a
+    JOIN patient p ON a.patient_id = p.id
+    JOIN doctor d ON a.doctor_id = d.id
+    ORDER BY a.appointment_date DESC
+";
+
+$result = $conn->query($query);
+if (!$result) {
+    die('Query failed: ' . $conn->error);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,6 +44,7 @@ include("../../includes/db.php");
                 <a href="./logout.php" class="links logout a7"><img src="../logo's/logout-logo.svg">Logout</a>
             </div>
         </div>
+
         <div class="mid">
             <div class="title">Manage Appointments</div>
             <div class="manage-box">
@@ -39,178 +58,43 @@ include("../../includes/db.php");
                         <div class="content">Status</div>
                         <div class="content">Action</div>
                     </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">Pending</div>
+
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <?php
+                                $datetime = strtotime($row['appointment_date']);
+                                $date = date("d M, Y", $datetime);
+                                $time = date("h:i A", $datetime);
+                                $status = $row['status'];
+                            ?>
+                            <div class="manage-box-content">
+                                <div class="content"><?php echo htmlspecialchars($row['patient_fname'] . ' ' . $row['patient_lname']); ?></div>
+                                <div class="content"><?php echo htmlspecialchars('Dr. ' . $row['doctor_fname'] . ' ' . $row['doctor_lname']); ?></div>
+                                <div class="content"><?php echo $date; ?></div>
+                                <div class="content"><?php echo $time; ?></div>
+                                <div class="content status">
+                                    <div class="<?php echo strtolower($status); ?>"><?php echo $status; ?></div>
+                                </div>
+                                <div class="content action">
+                                    <?php if ($status !== 'Cancelled'): ?>
+                                        <form method="post" action="../../includes/cancel-appointment.php" onsubmit="return confirm('Cancel this appointment?');">
+                                            <input type="hidden" name="appointment_id" value="<?php echo $row['id']; ?>">
+                                            <button type="submit" class="cancel">Cancel</button>
+                                        </form>
+                                    <?php else: ?>
+                                        <button class="cancel" disabled>Cancelled</button>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="manage-box-content">
+                            <div class="content" colspan="6">No appointments found</div>
                         </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="confirmed">Confirmed</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">Pending</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">Pending</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="confirmed">Confirmed</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">Pending</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="confirmed">Confirmed</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">pending</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="cancelled">Cancelled</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">pending</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="cancelled">Cancelled</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="cancelled">Cancelled</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="pending">pending</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
-                    <div class="manage-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">5:00 PM</div>
-                        <div class="content status">
-                            <div class="cancelled">Cancelled</div>
-                        </div>
-                        <div class="content action">
-                            <button class="cancel">Cancel</button>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="footer"></div>
     </div>
 </body>
 </html>

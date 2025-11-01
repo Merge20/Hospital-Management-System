@@ -1,6 +1,7 @@
 <?php
-include("../includes/session_check.php");
-include("../includes/db.php");
+include("./session_check.php");
+include("./db.php");
+include("./functions.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
@@ -22,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssss", $first_name, $last_name, $email, $phone, $password);
 
     if ($stmt->execute()) {
+        logActivity($conn, 'Doctor Added', "Doctor {$first_name} {$last_name} registered by Admin.");
         echo "<script>alert('doctor added successfully!'); window.location.href='../ADMIN/pages/doctor.php';</script>";
     } else {
         echo "<script>alert('Error adding doctor!'); window.history.back();</script>";

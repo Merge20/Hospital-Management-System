@@ -1,6 +1,23 @@
 <?php
 include("../../includes/session_check.php");
 include("../../includes/db.php");
+
+$query = "
+    SELECT 
+        r.id AS report_id,
+        CONCAT(p.first_name, ' ', p.last_name) AS patient_name,
+        CONCAT(d.first_name, ' ', d.last_name) AS doctor_name,
+        a.appointment_date,
+        r.report_type,
+        r.file_path
+    FROM reports r
+    JOIN appointments a ON r.appointment_id = a.id
+    JOIN patient p ON r.patient_id = p.id
+    JOIN doctor d ON r.doctor_id = d.id
+    ORDER BY r.uploaded_at DESC
+";
+
+$result = $conn->query($query);
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,6 +43,7 @@ include("../../includes/db.php");
                 <a href="./logout.php" class="links logout a7"><img src="../logo's/logout-logo.svg">Logout</a>
             </div>
         </div>
+
         <div class="mid">
             <div class="title">Manage Reports</div>
             <div class="report-box">
@@ -39,114 +57,36 @@ include("../../includes/db.php");
                         <div class="content">Status</div>
                         <div class="content">Action</div>
                     </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="not-uploaded">Not Uploaded</div>
+
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <div class="report-box-content">
+                                <div class="content"><?= htmlspecialchars($row['patient_name']); ?></div>
+                                <div class="content">Dr. <?= htmlspecialchars($row['doctor_name']); ?></div>
+                                <div class="content"><?= date("d M, Y", strtotime($row['appointment_date'])); ?></div>
+                                <div class="content"><?= htmlspecialchars($row['report_type']); ?></div>
+                                <div class="content status">
+                                    <div class="uploaded">Uploaded</div>
+                                </div>
+                                <div class="content action">
+                                    <button class="download" onclick="downloadReport(<?= $row['report_id'] ?>)">Download</button>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="report-box-content">
+                            <div class="content" style="width:100%; justify-content:center;">No reports found.</div>
                         </div>
-                        <div class="content action">
-                            <button class="upload">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="not-uploaded">Not Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="uploaded">Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload2">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="uploaded">Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload2">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="uploaded">Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload2">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="uploaded">Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload2">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="uploaded">Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload2">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
-                    <div class="report-box-content">
-                        <div class="content">Keshav Raj</div>
-                        <div class="content">Dr. Pandu</div>
-                        <div class="content">15 Oct, 2025</div>
-                        <div class="content">Blood Sugar</div>
-                        <div class="content status">
-                            <div class="uploaded">Uploaded</div>
-                        </div>
-                        <div class="content action">
-                            <button class="upload2">Upload</button>
-                            <button class="download">Download</button>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="footer"></div>
     </div>
+
+<script>
+function downloadReport(reportId) {
+    window.location.href = '../../includes/download_report.php?report_id=' + reportId;
+}
+</script>
 </body>
 </html>

@@ -55,7 +55,7 @@ include("../../includes/db.php");
                     </div>
                 </div>
                 <div class="save">
-                    <button>Add patient</button>
+                    <button>Add Doctor</button>
                 </div>
             </form>
         </div>

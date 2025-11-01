@@ -4,7 +4,6 @@ include("../includes/db.php");
 
 $patient_id = $_SESSION['user_id'];
 
-// Upcoming Appointments
 $sql_upcoming = "SELECT COUNT(*) AS total_upcoming 
                  FROM appointments 
                  WHERE patient_id = ? 
@@ -15,7 +14,6 @@ $stmt_upcoming->bind_param("i", $patient_id);
 $stmt_upcoming->execute();
 $total_upcoming = $stmt_upcoming->get_result()->fetch_assoc()['total_upcoming'] ?? 0;
 
-// Total Visits (Confirmed Appointments)
 $sql_visits = "SELECT COUNT(*) AS total_visits 
                FROM appointments 
                WHERE patient_id = ? 
@@ -25,7 +23,6 @@ $stmt_visits->bind_param("i", $patient_id);
 $stmt_visits->execute();
 $total_visits = $stmt_visits->get_result()->fetch_assoc()['total_visits'] ?? 0;
 
-// Last Consultation Date
 $sql_last = "SELECT appointment_date 
              FROM appointments 
              WHERE patient_id = ? 
@@ -89,7 +86,7 @@ $result = $stmt->get_result();
                 <a href="./pages/report.php" class="links a4"><img src="logo's/report-logo.svg">Reports</a>
             </div>
             <div class="h-right">
-                <a href="./pages/account-edit.php" class="links a5 profile"><img src="logo's/profile-logo.svg">Patient</a>
+                <a href="./pages/account-edit.php?role=patient&id=<?php echo $_SESSION['user_id']; ?>" class="links a6 profile"><img src="./logo's/profile-logo.svg">Patient</a>
                 <a href="./pages/logout.php" class="links logout a6"><img src="logo's/logout-logo.svg">Logout</a>
             </div>
         </div>

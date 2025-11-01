@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+            logActivity($conn, 'Patient Added', "Patient {$first_name} {$last_name} registered by Admin ID {$_SESSION['user_id']}.");
             echo "<script>alert('Patient added successfully!'); window.location.href='../ADMIN/pages/patient.php';</script>";
         } else {
             echo "<script>alert('Registration successful! Please log in.'); window.location.href='../index.php';</script>";
