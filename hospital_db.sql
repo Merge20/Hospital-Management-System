@@ -27,7 +27,7 @@ CREATE TABLE appointments (
     patient_id INT NOT NULL,
     doctor_id INT NOT NULL,
     appointment_date DATETIME NOT NULL,
-    status ENUM('Pending', 'Completed', 'Cancelled') DEFAULT 'Pending',
+    status ENUM('Pending', 'Confirmed', 'Cancelled') DEFAULT 'Pending',
     report_uploaded BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (patient_id) REFERENCES patient(id),
     FOREIGN KEY (doctor_id) REFERENCES doctor(id)
