@@ -24,7 +24,7 @@ This project demonstrates backend development using PHP with MySQL database inte
 
 - Backend: PHP  
 - Database: MySQL  
-- Frontend: HTML, CSS  
+- Frontend: HTML, CSS, JS
 - Server: Apache (XAMPP / WAMP / LAMP / MAMP)
 
 ---
