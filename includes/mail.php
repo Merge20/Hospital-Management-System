@@ -13,13 +13,13 @@ function sendMail($to, $subject, $body) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'Keshavr7200@gmail.com'; // your Gmail
-        $mail->Password   = 'fvtr jtti mqnt cqgm';   // 16-char app password
+        $mail->Username   = 'mail@gmail.com'; // your Gmail
+        $mail->Password   = '';   // 16-char app password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
         // Sender & recipient
-        $mail->setFrom('Keshavr7200@gmail.com', 'Hospital Management System');
+        $mail->setFrom('mail7200@gmail.com', 'Hospital Management System');
         $mail->addAddress($to);
 
         // Content
